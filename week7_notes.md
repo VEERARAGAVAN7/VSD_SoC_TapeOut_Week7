@@ -165,7 +165,7 @@ make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk gui_floorplan
 This image shows the floorplan view in OpenROAD where you can see two macros placed: **DAC** and **PLL** after the floorplanning step.
 
 ![Alt Text](Screenshots/fp3.png)
-![Alt Text](Screenshots/fp4.png)
+
 
 ### `run placement`
 
@@ -225,15 +225,6 @@ make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk cts
 ```shell
 make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk gui_cts
 ```
-
-This image shows the Clock Tree Synthesis (CTS) stage, highlighting a placed clock buffer (clkbuf_leaf_209_CLK) with its properties displayed in the Inspector, including position, orientation, and connectivity details.
-
-![Alt Text](Screenshots/ctsn1.png)
-
-This image shows the **Clock Tree Viewer** after CTS, illustrating the clock buffer distribution on the layout and a histogram of clock insertion delays, indicating balanced clock skew across the sinks.
-
-![Alt Text](Screenshots/ctsn2.png)
-
 This image shows the **Clock Tree Viewer after Clock Tree Synthesis (CTS)**, illustrating the hierarchical structure of the clock network. The root node at the top represents the clock source (`pll/CLK`), and the branches show the inserted clock buffers used to distribute the clock signal across the design. The vertical axis represents the **clock arrival times (in nanoseconds)** at each stage. The endpoints at the bottom represent the registers (clock sinks), where the clock reaches after passing through multiple buffer levels. The balanced branching and closely aligned arrival times indicate **low clock skew and a well-optimized clock tree**.
 
 ![Alt Text](Screenshots/cts3.png)
@@ -742,6 +733,8 @@ Pad                    0.00e+00   0.00e+00   0.00e+00   0.00e+00   0.0%
 Total                  1.13e-02   5.72e-03   2.44e-08   1.70e-02 100.0%
                           66.3%      33.7%       0.0%
 ```
+</details>
+
 
 ### `run routing`
 
