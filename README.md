@@ -1,4 +1,4 @@
-# 🧠 Physical Design Workshop — Week 7
+# 🧠 BabySoC Physical Design & Post-Route SPEF Generation — Week 7
 
 <div align="center">
 
