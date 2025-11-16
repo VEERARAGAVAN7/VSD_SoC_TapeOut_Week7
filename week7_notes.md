@@ -241,7 +241,7 @@ This image shows the **Setup Timing Report**, presenting a list of timing paths 
 
 All paths have **positive slack**, confirming that the design meets **setup timing requirements**.
 
-![Alt Text](Screenshots/ctsn3.png)
+![Alt Text](Screenshots/cts3.png)
 
 This image displays the **Hold Timing Report**, showing timing paths with details such as:
 
