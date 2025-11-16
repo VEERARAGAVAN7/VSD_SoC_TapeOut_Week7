@@ -25,26 +25,6 @@
 
 ---
 
-### ⚠️ Issue: Floorplan Step Fails with Macro Placement Error
-
-With OpenROAD version `v2.0-23132-g814048c9f3`, the Floorplan and Placement stages may fail during macro placement:
-
-![Macro Placement Error](Screenshots/t1.jpeg)
-
-![Macro Placement Error](Screenshots/t3.jpeg)
-
----
-
-### ✅ Fix: Use Updated Design Files
-
-Copy the clean design directories:
-
-```bash
-# Copy design directories
-flow_designs_sky130hd_vsdbabysoc → OpenROAD-flow-scripts/flow/designs/sky130hd/vsdbabysoc
-flow_designs_src_vsdbabysoc → OpenROAD-flow-scripts/flow/designs/src/vsdbabysoc
-```
-
 ### <ins>contents of config.mk</ins>
 
 <details> <summary><strong>config.mk</strong></summary>
