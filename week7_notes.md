@@ -5,7 +5,7 @@
 ## OpenROAD-Flow-Scripts: Physical Design, Post-Route SPEF and Verilog Netlist Generation for VSDBabySoC
 
 ### 📚 Contents
-- [Config.mk file data](#contents-of-config.mk)
+- [contents of config.mk](#contents-of-config.mk)
 - [Synthesis to Route of VSDBabySoC Design](#synthesis-to-route-of-vsdbabysoc-design)
   - [Run Synthesis](#run-synthesis)
   - [Run Floorplan](#run-floorplan)
