@@ -5,8 +5,7 @@
 ## OpenROAD-Flow-Scripts: Physical Design, Post-Route SPEF and Verilog Netlist Generation for VSDBabySoC
 
 ### 📚 Contents
-- [Issue: Floorplan Step Fails with Macro Placement Error](#issue-floorplan-step-fails-with-macro-placement-error)
-- [Fix: Use Updated Design Files](#fix-use-updated-design-files)
+- [Config.mk file data](#contents-of-config.mk)
 - [Synthesis to Route of VSDBabySoC Design](#synthesis-to-route-of-vsdbabysoc-design)
   - [Run Synthesis](#run-synthesis)
   - [Run Floorplan](#run-floorplan)
@@ -25,7 +24,7 @@
 
 ---
 
-### <ins>contents of config.mk</ins>
+### `contents of config.mk`
 
 <details> <summary><strong>config.mk</strong></summary>
 
