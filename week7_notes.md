@@ -783,13 +783,13 @@ make DESIGN_CONFIG=./designs/sky130hd/vsdbabysoc/config.mk gui_route
 ```
 This image shows the **post-routing stage**. The highlighted net `OUT` is fully routed, with its details such as signal type, wire type, and bounding box displayed in the Inspector.
 
-![Alt Text](Images/rt3.jpg)
+![Alt Text](Screenshots/rt3.png)
 
-![Alt Text](Images/rt4.jpg)
+![Alt Text](Screenshots/rt4.png)
 
 This image shows the **Routing Congestion Heatmap** after the routing stage. Areas with higher congestion are highlighted in **red**, while green regions indicate lower congestion. The highlighted net `_01595_` is fully routed, and its properties such as bounding box and connectivity details are shown in the Inspector.
 
-![Alt Text](Images/rt5.jpg)
+![Alt Text](Screenshots/rt5.png)
 
 #### <ins>Formula for Congestion:</ins>
 
@@ -801,6 +801,6 @@ Where:
 - **Used Routing Tracks** = Number of tracks occupied by wires in a specific region.
 - **Available Routing Tracks** = Total routing capacity of that region.
 
-![Alt Text](Images/rt6.jpg)
+![Alt Text](Screenshots/rt6.png)
 
 
