@@ -803,4 +803,115 @@ Where:
 
 ![Alt Text](Screenshots/rt6.png)
 
+### 🔄 Convert `.odb` to `.def` in OpenROAD
+
+Follow the steps below to export a DEF file from an existing OpenDB (`.odb`) database.
+
+```shell
+cd ~/OpenROAD-flow-scripts
+source env.sh
+cd flow
+openroad
+# Load the .odb database file
+read_db /home/veeraragavan/OpenROAD-flow-scripts/flow/results/sky130hd/vsdbabysoc/base/5_route.odb
+# Write out the DEF file
+write_def /home/veeraragavan/OpenROAD-flow-scripts/flow/results/sky130hd/vsdbabysoc/base/5_route.def
+```
+![Alt Text](Screenshots/odb2def1.png)
+
+```shell
+gvim /home/veeraragavan/OpenROAD-flow-scripts/flow/results/sky130hd/vsdbabysoc/base/5_route.def
+```
+![Alt Text](Screenshots/odb2def2.png)
+
+### `VSDBabySoC post_route SPEF generation`
+
+This section covers the step-by-step procedure to generate the **post-route Standard Parasitic Exchange Format (SPEF)** and **post-placement Verilog netlist** for the `VSDBabySoC` design using OpenROAD. These outputs are essential for accurate timing analysis and signoff after the routing stage. The SPEF file captures parasitic RC effects from the physical layout, while the updated Verilog reflects the final net connections post-placement and routing.
+
+### `Step 1: Launch OpenROAD`
+
+Before starting OpenROAD, set up the environment and navigate to the flow directory:
+
+```bash
+cd ~/OpenROAD-flow-scripts
+source env.sh
+cd flow/
+openroad
+```
+
+![Alt Text](Screenshots/openroad.jpg)
+
+### `Step 2: Load Design and Technology Files`
+
+Once inside the OpenROAD shell, run the following commands in sequence to load the required design and technology data for VSDBabySoC:
+
+These files describe the physical dimensions and metal/via layers for standard cells and macros:
+```shell
+read_lef /home/veeraragavan/OpenROAD-flow-scripts/flow/designs/sky130hd/vsdbabysoc/lef/sky130hd.lef
+read_lef /home/veeraragavan/OpenROAD-flow-scripts/flow/designs/sky130hd/vsdbabysoc/lef/avsdpll.lef
+read_lef /home/veeraragavan/OpenROAD-flow-scripts/flow/designs/sky130hd/vsdbabysoc/lef/avsddac.lef
+```
+
+This file contains timing and power data for the standard cells:
+```shell
+read_liberty /home/veeraragavan/OpenROAD-flow-scripts/flow/designs/sky130hd/vsdbabysoc/lib/avsddac.lef
+```
+
+The DEF file represents the post-route physical layout of the design:
+```shell
+read_def /home/veeraragavan/OpenROAD-flow-scripts/flow/results/sky130hd/vsdbabysoc/base/5_2_route.def
+```
+
+![Alt Text](Screenshots/loadtech.jpg)
+
+### `Step 3: RC Extraction and Output Generation`
+
+After loading the LEF, Liberty, and DEF files, run the following commands to define the process corner and extract parasitics using the available `.calibre`-format model:
+
+#### 🔹 1. Define Process Corner
+Set the process corner using the available Calibre-based extraction rules file:
+
+```tcl
+define_process_corner -ext_model_index 0 /home/veeraragavan/OpenROAD-flow-scripts/external-resources/open_pdks/sky130/openlane/rules.openrcx.sky130A.nom.calibre
+```
+
+#### 🔹 2. Extract Parasitics
+
+Run parasitic extraction using the same file:
+
+```shell
+extract_parasitics -ext_model_file /home/veeraragavan/OpenROAD-flow-scripts/external-resources/open_pdks/sky130/openlane/rules.openrcx.sky130A.nom.calibre
+```
+
+#### 🔹 3. Write SPEF File
+Save the extracted parasitics:
+
+```shell
+write_spef /home/veeraragavan/OpenROAD-flow-scripts/flow/designs/sky130hd/vsdbabysoc/vsdbabysoc.spef
+```
+
+#### 🔹 4. Write Post-Placement Verilog Netlist
+Save the netlist after placement and routing:
+
+```shell
+write_verilog /home/veeraragavan/OpenROAD-flow-scripts/flow/designs/sky130hd/vsdbabysoc/vsdbabysoc_post_place.v
+```
+
+![Alt Text](Screenshots/spef1.jpg)
+
+The Standard Parasitic Exchange Format (SPEF) file captures the resistance and capacitance (RC) parasitics of interconnects extracted from the routed layout. This file is essential for accurate post-route static timing analysis (STA) as it models real-world wire delays caused by metal layers and vias. Tools like OpenSTA read the SPEF file to compute timing paths that reflect true physical behavior after routing. Generating and inspecting the SPEF ensures that your design is signoff-ready with precise timing estimates.
+
+```shell
+gvim /home/veeraragavan/OpenROAD-flow-scripts/flow/designs/sky130hd/vsdbabysoc/vsdbabysoc.spef
+```
+
+![Alt Text](Screenshots/spef2.jpg)
+
+The post-placement Verilog netlist represents the logical connectivity of the design after placement and routing have been completed. This version of the netlist includes any modifications made by optimization or physical synthesis during the backend flow and ensures consistency with the final layout. It is used in downstream verification flows and enables correlation between logical simulation and physical implementation. Writing this netlist is crucial for timing closure and for validating the final connectivity of the design.
+
+```shell
+gvim /home/veeraragavan/OpenROAD-flow-scripts/flow/designs/sky130hd/vsdbabysoc/vsdbabysoc_post_place.v
+```
+
+![Alt Text](Screenshots/v1.jpg)
 
