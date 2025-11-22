@@ -29,7 +29,7 @@
 <details> <summary><strong>config.mk</strong></summary>
 
 ```
-  # Design and Platform Configuration
+    # Design and Platform Configuration
    export DESIGN_NICKNAME = vsdbabysoc
    export DESIGN_NAME = vsdbabysoc
    export PLATFORM    = sky130hd
@@ -62,26 +62,27 @@
                             $(vsdbabysoc_DIR)/lib/avsdpll.lib
 
  # Pin Order and Macro Placement Configurations
- # export FP_PIN_ORDER_CFG = $(vsdbabysoc_DIR)/pin_order.cfg
- # export MACRO_PLACEMENT_CFG = /home/veeraragavan/OpenROAD-flow-scripts/flow/designs/sky130hd/vsdbabysoc/macro.cfg
-
-   export FP_PIN_ORDER_CFG = $(vsdbabysoc_DIR)/pin_order.cfg
-   export MACRO_PLACEMENT_CFG = /home/veeraragavan/OpenROAD-flow-scripts/flow/designs/sky130hd/vsdbabysoc/macro.cfg
-
+ export FP_PIN_ORDER_CFG = $(vsdbabysoc_DIR)/pin_order.cfg
+ export MACRO_PLACEMENT_CFG = $(vsdbabysoc_DIR)/macro.cfg
+ #ADDED BY VEERA
+ #export PRE_GLOBAL_ROUTE_TCL = $(vsdbabysoc_DIR)/pre_gr.tcl
 
  # Clock Configuration
-   export CLOCK_PORT = CLK
-   export CLOCK_NET  = $(CLOCK_PORT)
-   export CLOCK_PERIOD = 20.0
+ export CLOCK_PORT = CLK
+ export CLOCK_NET  = $(CLOCK_PORT)
+ export CLOCK_PERIOD = 11.00
 
 # Floorplanning Configuration
-  export DIE_AREA   = 0 0 1600 1600
-  export CORE_AREA  = 20 20 1590 1590
-  export PLACE_DENSITY     = 0.10
-# export PL_TARGET_DENSITY = 0.10   # if available
+ export DIE_AREA   = 0 0 1600 1600
+ export CORE_AREA  = 20 20 1590 1590 
+  
+  
+# Core Area Usage and How close the cells can be placed
+ export PLACE_DENSITY = 0.6
+
 
 # Placement Configuration
-  export PLACE_PINS_ARGS = -exclude left:0-600 -exclude left:1000-1600 -exclude right:* -exclude top:* -exclude bottom:*
+export PLACE_PINS_ARGS = -exclude left:0-600 -exclude left:1000-1600 -exclude right:* -exclude top:* -exclude bottom:*
 
 # Tuning for Timing and Buffers
   export TNS_END_PERCENT     = 100
@@ -94,11 +95,13 @@
    export MAGIC_EXT_USE_GDS    = 1
    
    
- #Added by Veera
- # Macro placement & channel
-#export MACRO_PLACE_HALO    = 40 40
-#export MACRO_PLACE_CHANNEL = 30 30
+#ADDE BY VEERA
+# Macro placement & channel
+export MACRO_PLACE_HALO    = 30 30
+export MACRO_PLACE_CHANNEL = 40 40
+export MACRO_BLOCKAGE_HALO = 0
 export DISABLE_MACRO_PLACEMENT = 1
+
 ```
 </details>
 
