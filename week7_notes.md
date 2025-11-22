@@ -193,7 +193,7 @@ This image shows a zoomed-in view of the Placement Density Heatmap after the pla
 
 - **Red regions** indicate areas with higher cell density, approaching 100%.
 - **Green and blue regions** indicate moderate to low cell density.
-- The highlighted instance (`place383`) displays details such as origin coordinates, site count, site spacing, and bounding box dimensions.
+- The highlighted instance (`_07289_`) displays details such as origin coordinates, site count, site spacing, and bounding box dimensions.
 
 ❗**Note:** In the floorplan stage, you do not see any placement density heat maps because standard cells have not yet been placed. The heat map will only appear after the placement step.
 
@@ -839,7 +839,7 @@ cd flow/
 openroad
 ```
 
-![Alt Text](Screenshots/openroad.jpg)
+![Alt Text](Screenshots/openroad.png)
 
 ### `Step 2: Load Design and Technology Files`
 
@@ -862,7 +862,7 @@ The DEF file represents the post-route physical layout of the design:
 read_def /home/veeraragavan/OpenROAD-flow-scripts/flow/results/sky130hd/vsdbabysoc/base/5_2_route.def
 ```
 
-![Alt Text](Screenshots/loadtech.jpg)
+![Alt Text](Screenshots/loadtech.png)
 
 ### `Step 3: RC Extraction and Output Generation`
 
@@ -897,7 +897,7 @@ Save the netlist after placement and routing:
 write_verilog /home/veeraragavan/OpenROAD-flow-scripts/flow/designs/sky130hd/vsdbabysoc/vsdbabysoc_post_place.v
 ```
 
-![Alt Text](Screenshots/spef1.jpg)
+![Alt Text](Screenshots/spef1.png)
 
 The Standard Parasitic Exchange Format (SPEF) file captures the resistance and capacitance (RC) parasitics of interconnects extracted from the routed layout. This file is essential for accurate post-route static timing analysis (STA) as it models real-world wire delays caused by metal layers and vias. Tools like OpenSTA read the SPEF file to compute timing paths that reflect true physical behavior after routing. Generating and inspecting the SPEF ensures that your design is signoff-ready with precise timing estimates.
 
@@ -905,7 +905,7 @@ The Standard Parasitic Exchange Format (SPEF) file captures the resistance and c
 gvim /home/veeraragavan/OpenROAD-flow-scripts/flow/designs/sky130hd/vsdbabysoc/vsdbabysoc.spef
 ```
 
-![Alt Text](Screenshots/spef2.jpg)
+![Alt Text](Screenshots/spef2.png)
 
 The post-placement Verilog netlist represents the logical connectivity of the design after placement and routing have been completed. This version of the netlist includes any modifications made by optimization or physical synthesis during the backend flow and ensures consistency with the final layout. It is used in downstream verification flows and enables correlation between logical simulation and physical implementation. Writing this netlist is crucial for timing closure and for validating the final connectivity of the design.
 
@@ -913,5 +913,5 @@ The post-placement Verilog netlist represents the logical connectivity of the de
 gvim /home/veeraragavan/OpenROAD-flow-scripts/flow/designs/sky130hd/vsdbabysoc/vsdbabysoc_post_place.v
 ```
 
-![Alt Text](Screenshots/v1.jpg)
+![Alt Text](Screenshots/v1.png)
 
